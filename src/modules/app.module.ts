@@ -19,7 +19,6 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.POSTGRES_DATABASE,
       ssl: true,
       synchronize: true,
-      logging: true,
       entities: [`${__dirname}/../modules/**/*.entity.{js,ts}`],
       migrations: [`${__dirname}/../database/migrations/**/*{.ts,.js}`],
     }),

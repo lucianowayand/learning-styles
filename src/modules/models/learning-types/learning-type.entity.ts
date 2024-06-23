@@ -4,10 +4,10 @@ import { ModelEntity } from '../model.entity';
 
 @Entity('learning_types')
 export class LearningTypeEntity extends CoreEntity {
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
   @Column()
