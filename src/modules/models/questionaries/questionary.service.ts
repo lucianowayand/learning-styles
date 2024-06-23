@@ -15,6 +15,7 @@ export class QuestionaryService {
       where: {
         modelId,
       },
+      relations: ['questions'],
     });
   }
 }
