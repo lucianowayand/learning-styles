@@ -1,4 +1,3 @@
-import { QuestionaryModule } from './models/questionaries/questionary.module';
 import { ModelModule } from './models/model.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -9,7 +8,6 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    QuestionaryModule,
     ModelModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
