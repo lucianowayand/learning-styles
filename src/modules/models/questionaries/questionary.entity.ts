@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { CoreEntity } from '../../core/core.entity';
 import { ModelEntity } from '../model.entity';
+import { QuestionEntity } from './questions/question.entity';
 
 @Entity('questionaries')
 export class QuestionaryEntity extends CoreEntity {
@@ -11,4 +12,7 @@ export class QuestionaryEntity extends CoreEntity {
     onDelete: 'CASCADE',
   })
   model: ModelEntity;
+
+  @OneToMany(() => QuestionEntity, (question) => question.questionary)
+  questions: QuestionEntity[];
 }
