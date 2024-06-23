@@ -14,14 +14,12 @@ import { CreateUserDTO } from './dto/create-user.dto';
 export class UsersService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
+    private readonly repository: Repository<UserEntity>,
     private readonly jwtService: JwtService,
-  ) {
-    this.userRepository = userRepository;
-  }
+  ) {}
 
   async login(email: string, password: string): Promise<{ authToken: string }> {
-    const user = await this.userRepository.findOne({
+    const user = await this.repository.findOne({
       where: {
         email,
       },
@@ -46,7 +44,7 @@ export class UsersService {
     transaction?: EntityManager,
   ): Promise<UserEntity> {
     if (!transaction) {
-      return this.userRepository.manager.transaction((t) =>
+      return this.repository.manager.transaction((t) =>
         this.createUser(user, t),
       );
     }
@@ -67,7 +65,7 @@ export class UsersService {
     newUser.name = user.name;
     newUser.password = hash;
 
-    return this.userRepository.save(newUser);
+    return this.repository.save(newUser);
   }
 
   async getUsers(
@@ -75,7 +73,7 @@ export class UsersService {
     transaction?: EntityManager,
   ): Promise<UserEntity[]> {
     if (!transaction) {
-      return this.userRepository.manager.transaction((t) =>
+      return this.repository.manager.transaction((t) =>
         this.getUsers(email, t),
       );
     }
@@ -90,9 +88,7 @@ export class UsersService {
 
   async deleteUser(id: string, transaction?: EntityManager): Promise<void> {
     if (!transaction) {
-      return this.userRepository.manager.transaction((t) =>
-        this.deleteUser(id, t),
-      );
+      return this.repository.manager.transaction((t) => this.deleteUser(id, t));
     }
 
     const user = transaction?.findOne(UserEntity, {

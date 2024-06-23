@@ -1,3 +1,4 @@
+import { ModelModule } from './models/model.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -7,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ModelModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
