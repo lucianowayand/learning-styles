@@ -10,6 +10,6 @@ export class ModelController {
   @Get()
   @UseGuards(IsAuthorizedGuard)
   getAll(): Promise<ModelEntity[]> {
-    return this.service.findAllWithQuestionaries();
+    return this.service.findAllWithRelations();
   }
 }

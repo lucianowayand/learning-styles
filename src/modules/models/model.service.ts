@@ -10,7 +10,9 @@ export class ModelService {
     private readonly repository: Repository<ModelEntity>,
   ) {}
 
-  async findAllWithQuestionaries(): Promise<ModelEntity[]> {
-    return this.repository.find({ relations: ['questionaries'] });
+  async findAllWithRelations(): Promise<ModelEntity[]> {
+    return this.repository.find({
+      relations: ['questionaries', 'learningTypes'],
+    });
   }
 }

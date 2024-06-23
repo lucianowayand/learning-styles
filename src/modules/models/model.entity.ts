@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { CoreEntity } from '../core/core.entity';
 import { QuestionaryEntity } from './questionaries/questionary.entity';
+import { LearningTypeEntity } from './learning-types/learning-type.entity';
 
 @Entity('models')
 export class ModelEntity extends CoreEntity {
@@ -12,4 +13,7 @@ export class ModelEntity extends CoreEntity {
 
   @OneToMany(() => QuestionaryEntity, (questionary) => questionary.model)
   questionaries: QuestionaryEntity[];
+
+  @OneToMany(() => LearningTypeEntity, (learningType) => learningType.model)
+  learningTypes: LearningTypeEntity[];
 }
