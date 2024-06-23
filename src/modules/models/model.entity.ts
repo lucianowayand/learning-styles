@@ -10,6 +10,6 @@ export class ModelEntity extends CoreEntity {
   @Column()
   description: string;
 
-  @OneToMany(() => QuestionaryEntity, (questionary) => questionary.modelId)
+  @OneToMany(() => QuestionaryEntity, (questionary) => questionary.model)
   questionaries: QuestionaryEntity[];
 }
