@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { CoreEntity } from '../core/core.entity';
-import { QuestionaryEntity } from '../questionaries/questionary.entity';
+import { QuestionaryEntity } from './questionaries/questionary.entity';
 
 @Entity('models')
 export class ModelEntity extends CoreEntity {

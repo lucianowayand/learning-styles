@@ -1,4 +1,4 @@
-import { QuestionaryModule } from './questionaries/questionary.module';
+import { QuestionaryModule } from './models/questionaries/questionary.module';
 import { ModelModule } from './models/model.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
