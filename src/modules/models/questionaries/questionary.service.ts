@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QuestionaryEntity } from './questionary.entity';
+import { QuestionaryEntity } from './entities/questionary.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -15,7 +15,20 @@ export class QuestionaryService {
       where: {
         modelId,
       },
-      relations: ['questions'],
+      relations: ['questions', 'questions.answers'],
+    });
+  }
+
+  findById(id: string): Promise<QuestionaryEntity> {
+    return this.repository.findOne({
+      where: {
+        id,
+      },
+      relations: [
+        'questions',
+        'questions.answers',
+        'questions.answers.learningType',
+      ],
     });
   }
 }

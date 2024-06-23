@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { CoreEntity } from '../../core/core.entity';
 import { ModelEntity } from '../model.entity';
+import { AnswerEntity } from '../questionaries/entities/answer.entity';
 
 @Entity('learning_types')
 export class LearningTypeEntity extends CoreEntity {
@@ -17,4 +18,7 @@ export class LearningTypeEntity extends CoreEntity {
     onDelete: 'CASCADE',
   })
   model: ModelEntity;
+
+  @OneToMany(() => AnswerEntity, (answer) => answer.learningType)
+  answers: AnswerEntity[];
 }

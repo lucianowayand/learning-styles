@@ -1,10 +1,13 @@
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { CoreEntity } from '../../core/core.entity';
-import { ModelEntity } from '../model.entity';
-import { QuestionEntity } from './questions/question.entity';
+import { CoreEntity } from '../../../core/core.entity';
+import { ModelEntity } from '../../model.entity';
+import { QuestionEntity } from './question.entity';
 
 @Entity('questionaries')
 export class QuestionaryEntity extends CoreEntity {
+  @Column()
+  name: string;
+
   @Column()
   modelId: string;
 
