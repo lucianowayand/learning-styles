@@ -11,7 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { CreateUserDTO } from './dto/create-user.dto';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly repository: Repository<UserEntity>,
@@ -100,5 +100,15 @@ export class UsersService {
     }
 
     transaction.softDelete(UserEntity, id);
+  }
+
+  getUserIdFromToken(token: string): string {
+    const user = this.jwtService.verify(token, {
+      secret: process.env.POSTGRES_PASSWORD,
+    });
+
+    if (!user.id) throw new UnauthorizedException();
+
+    return user.id;
   }
 }

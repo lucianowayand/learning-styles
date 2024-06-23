@@ -2,10 +2,11 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { CoreEntity } from '../../../core/core.entity';
 import { ModelEntity } from '../../model.entity';
 import { QuestionEntity } from './question.entity';
+import { ResolutionEntity } from 'src/modules/resolutions/resolutions.entity';
 
 @Entity('questionaries')
 export class QuestionaryEntity extends CoreEntity {
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column()
@@ -18,4 +19,7 @@ export class QuestionaryEntity extends CoreEntity {
 
   @OneToMany(() => QuestionEntity, (question) => question.questionary)
   questions: QuestionEntity[];
+
+  @OneToMany(() => ResolutionEntity, (resolution) => resolution.questionary)
+  resolutions: ResolutionEntity[];
 }

@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { CoreEntity } from '../core/core.entity';
+import { ResolutionEntity } from '../resolutions/resolutions.entity';
 
 @Entity('users')
 export class UserEntity extends CoreEntity {
@@ -11,4 +12,7 @@ export class UserEntity extends CoreEntity {
 
   @Column()
   password: string;
+
+  @OneToMany(() => ResolutionEntity, (resolution) => resolution.user)
+  resolutions: ResolutionEntity[];
 }

@@ -7,7 +7,7 @@ import { LearningTypeEntity } from './learning-type.entity';
 export class LearningTypeController {
   constructor(private readonly service: LearningTypeService) {}
 
-  @Get(':modelId')
+  @Get('model/:modelId')
   @UseGuards(IsAuthorizedGuard)
   findByModelId(
     @Param('modelId') modelId: string,

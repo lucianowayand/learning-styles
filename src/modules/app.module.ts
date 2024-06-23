@@ -1,3 +1,4 @@
+import { ResolutionsModule } from './resolutions/resolutions.module';
 import { ModelModule } from './models/model.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -8,7 +9,9 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ResolutionsModule,
     ModelModule,
+    UserModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -22,7 +25,6 @@ import { ConfigModule } from '@nestjs/config';
       entities: [`${__dirname}/../modules/**/*.entity.{js,ts}`],
       migrations: [`${__dirname}/../database/migrations/**/*{.ts,.js}`],
     }),
-    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

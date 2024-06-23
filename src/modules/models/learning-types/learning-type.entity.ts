@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { CoreEntity } from '../../core/core.entity';
 import { ModelEntity } from '../model.entity';
 import { AnswerEntity } from '../questionaries/entities/answer.entity';
+import { ResolutionEntity } from 'src/modules/resolutions/resolutions.entity';
 
 @Entity('learning_types')
 export class LearningTypeEntity extends CoreEntity {
@@ -21,4 +22,7 @@ export class LearningTypeEntity extends CoreEntity {
 
   @OneToMany(() => AnswerEntity, (answer) => answer.learningType)
   answers: AnswerEntity[];
+
+  @OneToMany(() => ResolutionEntity, (resolution) => resolution.user)
+  resolutions: ResolutionEntity[];
 }
