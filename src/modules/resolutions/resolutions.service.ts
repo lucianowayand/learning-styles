@@ -14,8 +14,8 @@ export class ResolutionsService {
   ) {}
 
   async findByModelAndUser(
-    modelId: string,
     accessToken: string,
+    modelId?: string,
   ): Promise<ResolutionEntity[]> {
     const userId = await this.userService.getUserIdFromToken(accessToken);
 
@@ -23,18 +23,20 @@ export class ResolutionsService {
       throw new Error('User not found');
     }
 
-    const resolution = await this.repository.find({
+    let resolution = await this.repository.find({
       where: {
         userId,
       },
       relations: ['learningType'],
     });
 
-    const resolutionFiltered = resolution.filter(
-      (res) => res.learningType.modelId === modelId,
-    );
+    if (modelId) {
+      resolution = resolution.filter(
+        (res) => res.learningType.modelId === modelId,
+      );
+    }
 
-    return resolutionFiltered;
+    return resolution;
   }
 
   async create(

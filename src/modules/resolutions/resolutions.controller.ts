@@ -17,6 +17,14 @@ import { CreateResolutionDTO } from './dto/create-resolution.dto';
 export class ResolutionsController {
   constructor(private readonly service: ResolutionsService) {}
 
+  @Get()
+  @UseGuards(IsAuthorizedGuard)
+  findAll(@Req() req: Request): Promise<ResolutionEntity[]> {
+    const accessToken = req.headers.authorization.split(' ')[1];
+
+    return this.service.findByModelAndUser(accessToken);
+  }
+
   @Get('model/:modelId')
   @UseGuards(IsAuthorizedGuard)
   findByModelId(
@@ -25,7 +33,7 @@ export class ResolutionsController {
   ): Promise<ResolutionEntity[]> {
     const accessToken = req.headers.authorization.split(' ')[1];
 
-    return this.service.findByModelAndUser(modelId, accessToken);
+    return this.service.findByModelAndUser(accessToken, modelId);
   }
 
   @Post()
