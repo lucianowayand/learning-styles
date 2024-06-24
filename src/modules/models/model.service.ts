@@ -16,7 +16,11 @@ export class ModelService {
     });
   }
 
-  async findOneWithRelations(id: string): Promise<ModelEntity> {
+  findOneWithRelations(id: string): Promise<ModelEntity> {
+    if (!id) {
+      throw new Error('Id is required');
+    }
+
     return this.repository.findOne({
       where: { id },
       relations: ['questionaries', 'learningTypes'],
