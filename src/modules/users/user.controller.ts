@@ -16,8 +16,8 @@ export class UserController {
 
   @Post('login')
   login(
-    @Body() payload: { username: string; password: string },
+    @Body() payload: { email: string; password: string },
   ): Promise<{ authToken: string }> {
-    return this.usersService.login(payload.username, payload.password);
+    return this.usersService.login(payload.email, payload.password);
   }
 }

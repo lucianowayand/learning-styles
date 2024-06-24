@@ -19,6 +19,8 @@ export class UserService {
   ) {}
 
   async login(email: string, password: string): Promise<{ authToken: string }> {
+    if (!email || !password) throw new UnauthorizedException();
+
     const user = await this.repository.findOne({
       where: {
         email,
