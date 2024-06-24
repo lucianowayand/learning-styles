@@ -12,4 +12,10 @@ export class ModelController {
   getAll(): Promise<ModelEntity[]> {
     return this.service.findAllWithRelations();
   }
+
+  @Get(':id')
+  @UseGuards(IsAuthorizedGuard)
+  findById(id: string): Promise<ModelEntity> {
+    return this.service.findOneWithRelations(id);
+  }
 }

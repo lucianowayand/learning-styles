@@ -15,4 +15,11 @@ export class ModelService {
       relations: ['questionaries', 'learningTypes'],
     });
   }
+
+  async findOneWithRelations(id: string): Promise<ModelEntity> {
+    return this.repository.findOne({
+      where: { id },
+      relations: ['questionaries', 'learningTypes'],
+    });
+  }
 }
