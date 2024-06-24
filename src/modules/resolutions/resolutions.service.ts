@@ -28,6 +28,9 @@ export class ResolutionsService {
         userId,
       },
       relations: ['learningType'],
+      order: {
+        createdAt: 'DESC',
+      },
     });
 
     if (modelId) {
