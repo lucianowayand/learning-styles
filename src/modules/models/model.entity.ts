@@ -3,6 +3,11 @@ import { CoreEntity } from '../core/core.entity';
 import { QuestionaryEntity } from './questionaries/entities/questionary.entity';
 import { LearningTypeEntity } from './learning-types/learning-type.entity';
 
+export enum ModelKey {
+  VARK = 'VARK',
+  KOLB = 'KOLB',
+}
+
 @Entity('models')
 export class ModelEntity extends CoreEntity {
   @Column()
@@ -10,6 +15,9 @@ export class ModelEntity extends CoreEntity {
 
   @Column()
   description: string;
+
+  @Column('varchar', { nullable: true })
+  key: ModelKey;
 
   @OneToMany(() => QuestionaryEntity, (questionary) => questionary.model)
   questionaries: QuestionaryEntity[];
